@@ -1,10 +1,11 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { Follower } from "Components";
 
 const GET_FOLLOWERS = gql`
-  query {
-    user(login: "jacksonbates") {
+  query User($login: String!) {
+    user(login: $login) {
       followers(first: 100) {
         edges {
           node {
@@ -17,24 +18,28 @@ const GET_FOLLOWERS = gql`
   }
 `;
 
-function Github() {
-  const { loading, error, data } = useQuery(GET_FOLLOWERS);
+export const Github = props => {
+  const { login } = props;
+  const { loading, error, data } = useQuery(GET_FOLLOWERS, {
+    variables: {
+      login,
+    },
+  });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>{error.message}</p>;
 
-  console.log(data.user.followers.edges);
   return data.user.followers.edges.map((edge, i) => {
-    console.log(edge.node.name, i);
     return (
       edge.node.name && (
-        <div key={i}>
-          <p>{edge.node.name}</p>
-          <img src={edge.node.avatarUrl} />
-        </div>
+        <Follower
+          name={edge.node.name}
+          avatarUrl={edge.node.avatarUrl}
+          key={i}
+        />
       )
     );
   });
-}
+};
 
 export default Github;

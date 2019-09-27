@@ -1,6 +1,12 @@
+const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 module.exports = {
+  resolve: {
+    alias: {
+      Components: path.resolve(__dirname, "src/components"),
+    },
+  },
   module: {
     rules: [
       {
