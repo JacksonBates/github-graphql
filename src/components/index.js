@@ -1,2 +1,4 @@
 export { Follower } from "./Follower";
-export { Github } from "./Github";
+export { Followers } from "./Followers";
+export { Search } from "./Search";
+export { Title } from "./Title";
