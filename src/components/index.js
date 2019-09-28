@@ -1,3 +1,4 @@
+export { ApiKeySetter } from "./ApiKeySetter";
 export { Follower } from "./Follower";
 export { Followers } from "./Followers";
 export { Search } from "./Search";
