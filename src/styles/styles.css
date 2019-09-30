@@ -38,6 +38,12 @@ img {
   text-align: center;
 }
 
+.api-key-setter {
+  max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
+}
+
 /* Flex layout */
 
 .followers {

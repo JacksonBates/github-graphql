@@ -27,7 +27,27 @@ export const Followers = props => {
   });
 
   if (login !== "" && loading) return <p className="center">Loading...</p>;
-  if (login !== "" && error) return <p className="center">{error.message}</p>;
+  if (login !== "" && error)
+    return (
+      <p className="center">
+        {error.message.includes("401") ? (
+          <p>
+            Unauthorized:{" "}
+            <a
+              href="#"
+              onClick={() => {
+                window.localStorage.setItem("GITHUB_ACCESS_TOKEN", "");
+                window.location.reload();
+              }}
+            >
+              Reset Token
+            </a>
+          </p>
+        ) : (
+          error.message
+        )}
+      </p>
+    );
 
   return (
     <div className="followers">
